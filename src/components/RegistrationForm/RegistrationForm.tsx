@@ -17,9 +17,9 @@ function RegistrationForm() {
   }
 
   return (
-    <div className="container max-w-screen-md mx-auto px-4 border border-gray-300 rounded-lg shadow-lg py-5 bg-slate-50">
+    <div className="container max-w-fit mr-auto px-4">
       <h1 className="text-4xl text-center mt-8 text-slate-600 font-extralight">
-        Badminton Registration Form
+        Registration Form
       </h1>
       <form className="mt-8" onSubmit={handleSubmit}>
         <Fieldset className="space-y-4 mb-10">
