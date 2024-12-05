@@ -8,12 +8,14 @@ function RegistrationForm() {
     today.getMonth(),
     today.getDate()
   );
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     console.log("Form submitted", e.target);
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
-    console.log(data);
+    const formData = new FormData(e.target as HTMLFormElement);
+    // Display the key/value pairs
+    for (const pair of formData.entries()) {
+      console.log(pair[0], pair[1]);
+    }
   }
 
   return (
