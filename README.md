@@ -14,11 +14,11 @@ A React-Typescript show case using TailwindCSS.
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-username/badminton-registation-form.git
+   git clone https://github.com/your-username/show-cases.git
    ```
 2. Navigate to the project directory:
    ```sh
-   cd badminton-registation-form
+   cd show-cases
    ```
 3. Install dependencies:
    ```sh
