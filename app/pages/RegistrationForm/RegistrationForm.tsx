@@ -1,7 +1,9 @@
 import { Field, Fieldset, Legend } from "@headlessui/react";
 import React from "react";
+import { useNavigate } from "react-router";
 
-function RegistrationForm() {
+function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
+  let navigate = useNavigate();
   const today = new Date();
   const minDate = new Date(
     today.getFullYear() - 18,
@@ -10,19 +12,13 @@ function RegistrationForm() {
   );
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log("Form submitted", e.target);
     const formData = new FormData(e.target as HTMLFormElement);
-    // Display the key/value pairs
-    for (const pair of formData.entries()) {
-      console.log(pair[0], pair[1]);
-    }
+    onSubmit(Object.fromEntries(formData));
+    navigate("/confirm");
   }
 
   return (
     <div className="container max-w-fit mr-auto px-4">
-      <h1 className="text-4xl text-center mt-8 text-slate-600 font-extralight">
-        Registration Form
-      </h1>
       <form className="mt-8" onSubmit={handleSubmit}>
         <Fieldset className="space-y-4 mb-10">
           <Legend className="text-lg font-bold">Personal Details</Legend>
