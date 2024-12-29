@@ -2,16 +2,21 @@ import React from "react";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
-  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Calendar, Inbox, Search, Settings, FilePenLine } from "lucide-react";
+import {
+  Calendar,
+  Inbox,
+  Search,
+  Settings,
+  FilePenLine,
+  GalleryVertical,
+} from "lucide-react";
 <FilePenLine />;
 
 // Menu items.
@@ -21,11 +26,11 @@ const items = [
     url: "registration-form",
     icon: FilePenLine,
   },
-  // {
-  //   title: "Confirmation",
-  //   url: "confirm",
-  //   icon: Inbox,
-  // },
+  {
+    title: "Infinite Scroll",
+    url: "infinite-scroll",
+    icon: GalleryVertical,
+  },
   // {
   //   title: "Calendar",
   //   url: "#",
