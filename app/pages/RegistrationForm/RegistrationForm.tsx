@@ -1,6 +1,42 @@
-import { Field, Fieldset, Legend } from "@headlessui/react";
+"use client";
+
+import { Input } from "@/components/ui/input";
 import React from "react";
 import { useNavigate } from "react-router";
+import { cn } from "@/lib/utils";
+
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
+const formSchema = z.object({
+  firstName: z.string().min(2).max(50),
+  lastName: z.string().min(2).max(50),
+  email: z.string().email(),
+  countryCode: z.string().regex(/^\+\d{1,3}$/),
+  phone: z.string().regex(/^\d{10}$/),
+  birthDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  gender: z.enum(["male", "female", "non-binary"]),
+  streetName: z.string().min(2).max(50),
+  city: z.string().min(2).max(50),
+  postalCode: z.string().regex(/^\d{5}$/),
+  country: z.enum(["US", "GB", "AU", "IN", "CA"]),
+  badmintonLevel: z.enum(["beginner", "intermediate", "advanced"]),
+  membershipRules: z.boolean(),
+});
 
 function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
   let navigate = useNavigate();
@@ -10,307 +46,381 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
     today.getMonth(),
     today.getDate()
   );
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    onSubmit(Object.fromEntries(formData));
-    navigate("/confirm");
+
+  // 1. Define your form.
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      countryCode: "+1",
+      phone: "",
+      birthDate: "",
+      gender: "male",
+      streetName: "",
+      city: "",
+      postalCode: "",
+      country: "US",
+      badmintonLevel: "beginner",
+    },
+  });
+
+  function handleSubmit(values: z.infer<typeof formSchema>) {
+    debugger;
+    console.log(values);
+    // const formData = new FormData(e.target as HTMLFormElement);
+    // onSubmit(Object.fromEntries(formData));
+    // navigate("/confirm");
   }
 
   return (
     <div className="container max-w-fit mr-auto px-4">
-      <form className="mt-8" onSubmit={handleSubmit}>
-        <Fieldset className="space-y-4 mb-10">
-          <Legend className="text-lg font-bold">Personal Details</Legend>
-          <Field className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Field className="mb-0">
-              <label
-                htmlFor="firstName"
-                className="block text-sm font-medium text-gray-700"
-              >
-                First Name <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                id="firstName"
+      <Form {...form}>
+        <form className="mt-8" onSubmit={form.handleSubmit(handleSubmit)}>
+          <div className="space-y-4 mb-10">
+            <h2 className="text-lg font-bold">Personal Details</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* First name */}
+              <FormField
+                control={form.control}
                 name="firstName"
-                required
-                placeholder="John"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                render={({ field }) => (
+                  <FormItem className="mb-0">
+                    <FormLabel className="block text-sm font-medium text-gray-700">
+                      First Name <span className="text-red-500">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        required
+                        placeholder="John"
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        {...field}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
               />
-            </Field>
-            <Field className="mb-0">
-              <label
-                htmlFor="lastName"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Last Name <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                id="lastName"
+
+              {/* Last name */}
+              <FormField
+                control={form.control}
                 name="lastName"
-                required
-                placeholder="Doe"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                render={({ field }) => (
+                  <FormItem className="mb-0">
+                    <FormLabel className="block text-sm font-medium text-gray-700">
+                      Last Name <span className="text-red-500">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        required
+                        placeholder="Doe"
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        {...field}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
               />
-            </Field>
-          </Field>
-          <Field className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Email <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="email"
-              id="email"
+            </div>
+
+            {/* Email address */}
+            <FormField
+              control={form.control}
               name="email"
-              placeholder="johndoe@email.com "
-              required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              render={({ field }) => (
+                <FormItem className="mb-4">
+                  <FormLabel className="block text-sm font-medium text-gray-700">
+                    Email <span className="text-red-500">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      placeholder="johndoe@email.com "
+                      required
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
             />
-          </Field>
-          <Field className="mb-4">
-            <label
-              htmlFor="phone"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Phone Number <span className="text-red-500">*</span>
-            </label>
-            <Field className="flex mt-1">
-              <select
-                id="countryCode"
-                name="countryCode"
-                required
-                className="block w-1/4 px-3 py-2 border border-gray-300 rounded-l-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              >
-                <option value="+1">🇺🇸 +1</option>
-                <option value="+44">🇬🇧 +44</option>
-                <option value="+61">🇦🇺 +61</option>
-                <option value="+91">🇮🇳 +91</option>
-              </select>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                placeholder="0666666666"
-                required
-                pattern="[0-9]{10}"
-                title="Enter only numeric values without any spaces"
-                maxLength={10}
-                className="block w-3/4 px-3 py-2 border border-gray-300 rounded-r-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-            </Field>
-          </Field>
-          <Field className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Field className="mb-0">
-              <label
-                htmlFor="birthDate"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Birth Date <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="date"
-                id="birthDate"
+
+            {/* Phone number */}
+            <div className="mb-4">
+              <FormLabel className="block text-sm font-medium text-gray-700">
+                Phone Number <span className="text-red-500">*</span>
+              </FormLabel>
+              <div className="flex mt-1">
+                <FormField
+                  control={form.control}
+                  name="countryCode"
+                  render={({ field }) => (
+                    <select
+                      required
+                      className="block w-1/4 px-3 py-2 border border-gray-300 rounded-l-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      {...field}
+                    >
+                      <option value="+1">🇺🇸 +1</option>
+                      <option value="+44">🇬🇧 +44</option>
+                      <option value="+61">🇦🇺 +61</option>
+                      <option value="+91">🇮🇳 +91</option>
+                    </select>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <Input
+                      type="tel"
+                      placeholder="0666666666"
+                      required
+                      pattern="[0-9]{10}"
+                      title="Enter only numeric values without any spaces"
+                      maxLength={10}
+                      className="block w-3/4 px-3 py-2 border border-gray-300 rounded-r-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      {...field}
+                    />
+                  )}
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Birth Date */}
+              <FormField
+                control={form.control}
                 name="birthDate"
-                max={minDate.toISOString().split("T")[0]}
-                required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                render={({ field }) => (
+                  <FormItem className="mb-0">
+                    <FormLabel className="block text-sm font-medium text-gray-700">
+                      Date of Birth <span className="text-red-500">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      {/* TODO: Change to shadcn components */}
+                      <Input
+                        type="date"
+                        {...field}
+                        max={minDate.toISOString().split("T")[0]}
+                        required
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
               />
-            </Field>
-            <Field className="mb-0">
-              <label
-                htmlFor="gender"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Gender <span className="text-red-500">*</span>
-              </label>
-              <select
-                id="gender"
+
+              {/* Gender */}
+              <FormField
+                control={form.control}
                 name="gender"
-                required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              >
-                <option value="">-- Select Gender --</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="non-binary">Non-Binary</option>
-              </select>
-            </Field>
-          </Field>
-        </Fieldset>
+                render={({ field }) => (
+                  <FormItem className="mb-0">
+                    <FormLabel className="block text-sm font-medium text-gray-700">
+                      Gender <span className="text-red-500">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <select
+                        {...field}
+                        required
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      >
+                        <option value="">-- Select Gender --</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="non-binary">Non-Binary</option>
+                      </select>
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
 
-        <Fieldset className="space-y-4 mb-10">
-          <Legend className="text-lg font-bold">Contact Details</Legend>
-          <Field className="mb-4">
-            <label
-              htmlFor="streetName"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Street Name <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              id="streetName"
+          <div className="space-y-4 mb-10">
+            <h2 className="text-lg font-bold">Contact Details</h2>
+
+            {/* Street name */}
+            <FormField
+              control={form.control}
               name="streetName"
-              required
-              placeholder="123 Main St"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="block text-sm font-medium text-gray-700">
+                    Street Name <span className="text-red-500">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      type="text"
+                      {...field}
+                      required
+                      placeholder="123 Main St"
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
             />
-          </Field>
-          <Field className="grid grid-cols-3 sm:grid-cols-5 gap-2">
-            <Field className="col-span-3 mb-0">
-              <label
-                htmlFor="city"
-                className="block text-sm font-medium text-gray-700"
-              >
-                City <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                id="city"
-                name="city"
-                required
-                placeholder="New York"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-            </Field>
-            <Field className="col-span-2 mb-0">
-              <label
-                htmlFor="postalCode"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Postal Code <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                id="postalCode"
-                name="postalCode"
-                required
-                placeholder="12345"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-            </Field>
-          </Field>
-          <Field className="mb-4">
-            <label
-              htmlFor="country"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Country <span className="text-red-500">*</span>
-            </label>
-            <select
-              id="country"
-              name="country"
-              required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            >
-              <option value="">-- Select Country --</option>
-              <option value="US">United States</option>
-              <option value="GB">United Kingdom</option>
-              <option value="AU">Australia</option>
-              <option value="IN">India</option>
-              <option value="CA">Canada</option>
-            </select>
-          </Field>
-        </Fieldset>
-        <Fieldset className="space-y-4 mb-10">
-          <Legend className="text-lg font-bold">Badminton Level</Legend>
-          <Field className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
-              Give indication your badminton skill{" "}
-              <span className="text-red-500">*</span>
-            </label>
-            <Field className="mt-2 space-y-2">
-              <Field className="flex items-center">
-                <input
-                  id="beginner"
-                  name="badmintonLevel"
-                  type="radio"
-                  value="beginner"
-                  required
-                  className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
-                />
-                <label
-                  htmlFor="beginner"
-                  className="ml-2 block text-sm text-gray-900"
-                >
-                  Beginner
-                </label>
-              </Field>
-              <Field className="flex items-center">
-                <input
-                  id="intermediate"
-                  name="badmintonLevel"
-                  type="radio"
-                  value="intermediate"
-                  className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
-                />
-                <label
-                  htmlFor="intermediate"
-                  className="ml-2 block text-sm text-gray-900"
-                >
-                  Intermediate
-                </label>
-              </Field>
-              <Field className="flex items-center">
-                <input
-                  id="advanced"
-                  name="badmintonLevel"
-                  type="radio"
-                  value="advanced"
-                  className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
-                />
-                <label
-                  htmlFor="advanced"
-                  className="ml-2 block text-sm text-gray-900"
-                >
-                  Advanced
-                </label>
-              </Field>
-            </Field>
-          </Field>
-        </Fieldset>
 
-        <Field className="mb-4">
-          <hr></hr>
-          <Field className="mt-5 space-y-2">
-            <Field className="flex items-center">
-              <input
-                id="membershipRules"
-                name="membershipRules"
-                type="checkbox"
-                required
-                className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
+            {/* City */}
+            <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
+              <FormField
+                control={form.control}
+                name="city"
+                render={({ field }) => (
+                  <FormItem className="col-span-3 mb-0">
+                    <FormLabel className="block text-sm font-medium text-gray-700">
+                      City <span className="text-red-500">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        required
+                        placeholder="New York"
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        {...field}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
               />
-              <label
-                htmlFor="membershipRules"
-                className="ml-2 block text-sm text-gray-900"
-              >
-                I confirm that information I provided is true and that I am at
-                least 18 years old.
-              </label>
-            </Field>
-          </Field>
-        </Field>
-        <Field className="flex justify-end">
-          <button
-            type="reset"
-            className="mr-4 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-          >
-            Reset
-          </button>
-          <button
-            type="submit"
-            className="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Next
-          </button>
-        </Field>
-      </form>
+
+              {/* Postal code */}
+              <FormField
+                control={form.control}
+                name="postalCode"
+                render={({ field }) => (
+                  <FormItem className="col-span-2 mb-0">
+                    <FormLabel className="block text-sm font-medium text-gray-700">
+                      Postal Code <span className="text-red-500">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        required
+                        placeholder="12345"
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        {...field}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            {/* Country */}
+            <FormField
+              control={form.control}
+              name="country"
+              render={({ field }) => (
+                <FormItem className="mb-4">
+                  <FormLabel className="block text-sm font-medium text-gray-700">
+                    Country <span className="text-red-500">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <select
+                      {...field}
+                      required
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    >
+                      <option value="">-- Select Country --</option>
+                      <option value="US">United States</option>
+                      <option value="GB">United Kingdom</option>
+                      <option value="AU">Australia</option>
+                      <option value="IN">India</option>
+                      <option value="CA">Canada</option>
+                    </select>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className="space-y-4 mb-10">
+            <h2 className="text-lg font-bold">Badminton Level</h2>
+            <FormField
+              control={form.control}
+              name="badmintonLevel"
+              render={({ field }) => (
+                <FormItem className="mb-4">
+                  <FormLabel className="block text-sm font-medium text-gray-700">
+                    Give indication your badminton skill{" "}
+                    <span className="text-red-500">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <RadioGroup
+                      className="mt-2 space-y-2"
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="beginner" required />
+                        </FormControl>
+                        <FormLabel className="font-normal">Beginner</FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="intermediate" />
+                        </FormControl>
+                        <FormLabel className="font-normal">
+                          Intermediate
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="advanced" />
+                        </FormControl>
+                        <FormLabel className="font-normal">Advanced</FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className="mb-4">
+            <div className="mt-5 space-y-2">
+              <FormField
+                control={form.control}
+                name="membershipRules"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                    <FormLabel className="ml-2 block text-sm text-gray-900">
+                      I confirm that information I provided is true and that I
+                      am at least 18 years old.
+                    </FormLabel>
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
+          <div className="flex justify-end">
+            <Button
+              type="reset"
+              className="mr-4 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+            >
+              Reset
+            </Button>
+            <Button
+              type="submit"
+              className="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Submit
+            </Button>
+          </div>
+        </form>
+      </Form>
     </div>
   );
 }
