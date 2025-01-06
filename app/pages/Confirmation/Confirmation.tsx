@@ -1,7 +1,15 @@
+import { Button } from "@/components/ui/button";
 import { Field } from "@headlessui/react/dist/components/field/field";
 import React from "react";
+import { useNavigate } from "react-router";
 
 function Confirmation({ registree }: any) {
+  let navigate = useNavigate();
+  function onBack() {
+    // Implement the function to navigate back to the registration
+    navigate("/registration-form");
+  }
+
   return (
     <div className="container max-w-fit mr-auto px-4">
       <h1 className="text-3xl font-bold mt-4">
@@ -35,12 +43,13 @@ function Confirmation({ registree }: any) {
           further instructions.
         </p>
         <Field className="flex mt-4">
-          <button
+          <Button
+            onClick={onBack}
             type="button"
             className="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Back
-          </button>
+          </Button>
         </Field>
       </div>
     </div>

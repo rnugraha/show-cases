@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import RegistrationForm from "./pages/RegistrationForm/RegistrationForm";
 import Layout from "./layout";
 import { Route, Routes } from "react-router";
-import InfiniteScroll from "./pages/InfiniteScroll";
+import Confirmation from "./pages/Confirmation";
+import InfiniteScroll from "./pages/InfiniteScroll/InfiniteScroll";
 
 export default function App() {
   const [registree, setRegistree] = useState(null);
@@ -16,6 +17,10 @@ export default function App() {
         <Route
           path="registration-form"
           element={<RegistrationForm onSubmit={handleOnSubmit} />}
+        />
+        <Route
+          path="confirm"
+          element={<Confirmation registree={registree} />}
         />
         <Route path="infinite-scroll" element={<InfiniteScroll />} />
       </Routes>

@@ -3,14 +3,12 @@
 import { Input } from "@/components/ui/input";
 import React from "react";
 import { useNavigate } from "react-router";
-import { cn } from "@/lib/utils";
 
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -28,14 +26,22 @@ const formSchema = z.object({
   email: z.string().email(),
   countryCode: z.string().regex(/^\+\d{1,3}$/),
   phone: z.string().regex(/^\d{10}$/),
-  birthDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
-  gender: z.enum(["male", "female", "non-binary"]),
+  birthDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
+    message: "Please select a valid date",
+  }),
+  gender: z.enum(["male", "female", "non-binary"], {
+    message: "Please select gender",
+  }),
   streetName: z.string().min(2).max(50),
   city: z.string().min(2).max(50),
-  postalCode: z.string().regex(/^\d{5}$/),
-  country: z.enum(["US", "GB", "AU", "IN", "CA"]),
+  postalCode: z.string().regex(/^\d{5}$/, {
+    message: "Please enter valid postal code",
+  }),
+  country: z.enum(["US", "GB", "AU", "IN", "CA"], {
+    message: "Please select country",
+  }),
   badmintonLevel: z.enum(["beginner", "intermediate", "advanced"]),
-  membershipRules: z.boolean(),
+  membershipRules: z.boolean({ message: "Please accept the membership rules" }),
 });
 
 function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
@@ -57,27 +63,33 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
       countryCode: "+1",
       phone: "",
       birthDate: "",
-      gender: "male",
+      gender: undefined,
       streetName: "",
       city: "",
       postalCode: "",
-      country: "US",
+      country: undefined,
       badmintonLevel: "beginner",
+      membershipRules: false,
     },
   });
 
-  function handleSubmit(values: z.infer<typeof formSchema>) {
-    debugger;
+  function onSubmitMe(values: z.infer<typeof formSchema>) {
     console.log(values);
-    // const formData = new FormData(e.target as HTMLFormElement);
-    // onSubmit(Object.fromEntries(formData));
-    // navigate("/confirm");
+    if (!values.membershipRules) {
+      form.setError("membershipRules", {
+        type: "manual",
+        message: "Please accept the membership rules",
+      });
+      return;
+    }
+    onSubmit(values);
+    navigate("/confirm");
   }
 
   return (
     <div className="container max-w-fit mr-auto px-4">
       <Form {...form}>
-        <form className="mt-8" onSubmit={form.handleSubmit(handleSubmit)}>
+        <form className="mt-8" onSubmit={form.handleSubmit(onSubmitMe)}>
           <div className="space-y-4 mb-10">
             <h2 className="text-lg font-bold">Personal Details</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -93,12 +105,12 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                     <FormControl>
                       <Input
                         type="text"
-                        required
                         placeholder="John"
                         className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         {...field}
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -115,12 +127,12 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                     <FormControl>
                       <Input
                         type="text"
-                        required
                         placeholder="Doe"
                         className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         {...field}
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -139,11 +151,11 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                     <Input
                       type="email"
                       placeholder="johndoe@email.com "
-                      required
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       {...field}
                     />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -158,32 +170,28 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                   control={form.control}
                   name="countryCode"
                   render={({ field }) => (
-                    <select
-                      required
-                      className="block w-1/4 px-3 py-2 border border-gray-300 rounded-l-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      {...field}
-                    >
-                      <option value="+1">🇺🇸 +1</option>
-                      <option value="+44">🇬🇧 +44</option>
-                      <option value="+61">🇦🇺 +61</option>
-                      <option value="+91">🇮🇳 +91</option>
-                    </select>
+                    <FormControl>
+                      <select
+                        className="block w-1/4 px-3 py-2 border border-gray-300 rounded-l-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        {...field}
+                      >
+                        <option value="+1">🇺🇸 +1</option>
+                        <option value="+44">🇬🇧 +44</option>
+                        <option value="+61">🇦🇺 +61</option>
+                        <option value="+91">🇮🇳 +91</option>
+                      </select>
+                    </FormControl>
                   )}
                 />
                 <FormField
                   control={form.control}
                   name="phone"
                   render={({ field }) => (
-                    <Input
-                      type="tel"
-                      placeholder="0666666666"
-                      required
-                      pattern="[0-9]{10}"
-                      title="Enter only numeric values without any spaces"
-                      maxLength={10}
-                      className="block w-3/4 px-3 py-2 border border-gray-300 rounded-r-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      {...field}
-                    />
+                    <FormItem className="block w-3/4 px-3 py-2 border border-gray-300 rounded-r-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                      <FormControl>
+                        <Input type="tel" placeholder="0666666666" {...field} />
+                      </FormControl>
+                    </FormItem>
                   )}
                 />
               </div>
@@ -205,10 +213,10 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                         type="date"
                         {...field}
                         max={minDate.toISOString().split("T")[0]}
-                        required
                         className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -225,7 +233,6 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                     <FormControl>
                       <select
                         {...field}
-                        required
                         className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       >
                         <option value="">-- Select Gender --</option>
@@ -234,6 +241,7 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                         <option value="non-binary">Non-Binary</option>
                       </select>
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -256,11 +264,11 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                     <Input
                       type="text"
                       {...field}
-                      required
                       placeholder="123 Main St"
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -278,12 +286,12 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                     <FormControl>
                       <Input
                         type="text"
-                        required
                         placeholder="New York"
                         className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         {...field}
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -300,12 +308,12 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                     <FormControl>
                       <Input
                         type="text"
-                        required
                         placeholder="12345"
                         className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         {...field}
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -323,7 +331,6 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                   <FormControl>
                     <select
                       {...field}
-                      required
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     >
                       <option value="">-- Select Country --</option>
@@ -334,6 +341,7 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                       <option value="CA">Canada</option>
                     </select>
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -358,7 +366,7 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                     >
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
-                          <RadioGroupItem value="beginner" required />
+                          <RadioGroupItem value="beginner" />
                         </FormControl>
                         <FormLabel className="font-normal">Beginner</FormLabel>
                       </FormItem>
@@ -389,18 +397,21 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                 control={form.control}
                 name="membershipRules"
                 render={({ field }) => (
-                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                    <FormControl>
-                      <Checkbox
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                    </FormControl>
-                    <FormLabel className="ml-2 block text-sm text-gray-900">
-                      I confirm that information I provided is true and that I
-                      am at least 18 years old.
-                    </FormLabel>
-                  </FormItem>
+                  <>
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <FormLabel className="ml-2 block text-sm text-gray-900">
+                        I confirm that information I provided is true and that I
+                        am at least 18 years old.
+                      </FormLabel>
+                    </FormItem>
+                    <FormMessage className="ml-2 block" />
+                  </>
                 )}
               />
             </div>
