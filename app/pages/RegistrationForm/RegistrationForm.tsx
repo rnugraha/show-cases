@@ -16,6 +16,13 @@ import {
 } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -103,12 +110,7 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                       First Name <span className="text-red-500">*</span>
                     </FormLabel>
                     <FormControl>
-                      <Input
-                        type="text"
-                        placeholder="John"
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        {...field}
-                      />
+                      <Input type="text" placeholder="John" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -125,12 +127,7 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                       Last Name <span className="text-red-500">*</span>
                     </FormLabel>
                     <FormControl>
-                      <Input
-                        type="text"
-                        placeholder="Doe"
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        {...field}
-                      />
+                      <Input type="text" placeholder="Doe" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -151,7 +148,6 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                     <Input
                       type="email"
                       placeholder="johndoe@email.com "
-                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       {...field}
                     />
                   </FormControl>
@@ -165,29 +161,36 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
               <FormLabel className="block text-sm font-medium text-gray-700">
                 Phone Number <span className="text-red-500">*</span>
               </FormLabel>
-              <div className="flex mt-1">
+              <div className="flex mt-1 gap-4">
                 <FormField
                   control={form.control}
                   name="countryCode"
                   render={({ field }) => (
-                    <FormControl>
-                      <select
-                        className="block w-1/4 px-3 py-2 border border-gray-300 rounded-l-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        {...field}
+                    <FormItem>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
                       >
-                        <option value="+1">🇺🇸 +1</option>
-                        <option value="+44">🇬🇧 +44</option>
-                        <option value="+61">🇦🇺 +61</option>
-                        <option value="+91">🇮🇳 +91</option>
-                      </select>
-                    </FormControl>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a verified email to display" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="+1">🇺🇸 +1</SelectItem>
+                          <SelectItem value="+44">🇬🇧 +44</SelectItem>
+                          <SelectItem value="+61">🇦🇺 +61</SelectItem>
+                          <SelectItem value="+91">🇮🇳 +91</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormItem>
                   )}
                 />
                 <FormField
                   control={form.control}
                   name="phone"
                   render={({ field }) => (
-                    <FormItem className="block w-3/4 px-3 py-2 border border-gray-300 rounded-r-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <FormItem>
                       <FormControl>
                         <Input type="tel" placeholder="0666666666" {...field} />
                       </FormControl>
@@ -213,7 +216,7 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                         type="date"
                         {...field}
                         max={minDate.toISOString().split("T")[0]}
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        className="mt-1 block w-full"
                       />
                     </FormControl>
                     <FormMessage />
@@ -230,17 +233,23 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                     <FormLabel className="block text-sm font-medium text-gray-700">
                       Gender <span className="text-red-500">*</span>
                     </FormLabel>
-                    <FormControl>
-                      <select
-                        {...field}
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    <FormItem>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
                       >
-                        <option value="">-- Select Gender --</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="non-binary">Non-Binary</option>
-                      </select>
-                    </FormControl>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a gender" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="male">Male</SelectItem>
+                          <SelectItem value="female">Female</SelectItem>
+                          <SelectItem value="non-binary">Non Binary</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormItem>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -261,12 +270,7 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                     Street Name <span className="text-red-500">*</span>
                   </FormLabel>
                   <FormControl>
-                    <Input
-                      type="text"
-                      {...field}
-                      placeholder="123 Main St"
-                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    />
+                    <Input type="text" {...field} placeholder="123 Main St" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -287,7 +291,7 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                       <Input
                         type="text"
                         placeholder="New York"
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        className="mt-1 block w-full "
                         {...field}
                       />
                     </FormControl>
@@ -309,7 +313,7 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                       <Input
                         type="text"
                         placeholder="12345"
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        className="mt-1 block w-full"
                         {...field}
                       />
                     </FormControl>
@@ -328,19 +332,25 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                   <FormLabel className="block text-sm font-medium text-gray-700">
                     Country <span className="text-red-500">*</span>
                   </FormLabel>
-                  <FormControl>
-                    <select
-                      {...field}
-                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  <FormItem>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
                     >
-                      <option value="">-- Select Country --</option>
-                      <option value="US">United States</option>
-                      <option value="GB">United Kingdom</option>
-                      <option value="AU">Australia</option>
-                      <option value="IN">India</option>
-                      <option value="CA">Canada</option>
-                    </select>
-                  </FormControl>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a country" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="US">🇺🇸 United States</SelectItem>
+                        <SelectItem value="GB">🇬🇧 United Kingdom</SelectItem>
+                        <SelectItem value="AU">🇦🇺 Australia</SelectItem>
+                        <SelectItem value="IN">🇮🇳 India</SelectItem>
+                        <SelectItem value="CA">Canada</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
                   <FormMessage />
                 </FormItem>
               )}
