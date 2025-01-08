@@ -18,6 +18,7 @@ import {
   Settings,
   FilePenLine,
   GalleryVertical,
+  Table,
 } from "lucide-react";
 <FilePenLine />;
 
@@ -33,11 +34,11 @@ const items = [
     url: "infinite-scroll",
     icon: GalleryVertical,
   },
-  // {
-  //   title: "Calendar",
-  //   url: "#",
-  //   icon: Calendar,
-  // },
+  {
+    title: "Data Table",
+    url: "data-table",
+    icon: Table,
+  },
   // {
   //   title: "Search",
   //   url: "#",

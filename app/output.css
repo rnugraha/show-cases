@@ -847,6 +847,10 @@ body {
   display: table;
 }
 
+.\!table {
+  display: table !important;
+}
+
 .grid {
   display: grid;
 }
@@ -922,6 +926,10 @@ body {
 
 .h-px {
   height: 1px;
+}
+
+.h-24 {
+  height: 6rem;
 }
 
 .max-h-96 {
@@ -1077,6 +1085,10 @@ body {
   flex-shrink: 0;
 }
 
+.caption-bottom {
+  caption-side: bottom;
+}
+
 .border-collapse {
   border-collapse: collapse;
 }
@@ -1216,6 +1228,12 @@ body {
   --tw-space-y-reverse: 0;
   margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0px * var(--tw-space-y-reverse));
+}
+
+.space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .overflow-auto {
@@ -1385,6 +1403,10 @@ body {
   background-color: hsl(var(--accent));
 }
 
+.bg-muted\/50 {
+  background-color: hsl(var(--muted) / 0.5);
+}
+
 .fill-current {
   fill: currentColor;
 }
@@ -1473,6 +1495,11 @@ body {
   padding-bottom: 0.25rem;
 }
 
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
 .pt-0 {
   padding-top: 0px;
 }
@@ -1503,6 +1530,10 @@ body {
 
 .text-center {
   text-align: center;
+}
+
+.align-middle {
+  vertical-align: middle;
 }
 
 .text-4xl {
@@ -1960,6 +1991,10 @@ body {
   background-color: hsl(var(--primary));
 }
 
+.hover\:bg-muted\/50:hover {
+  background-color: hsl(var(--muted) / 0.5);
+}
+
 .hover\:text-accent-foreground:hover {
   color: hsl(var(--accent-foreground));
 }
@@ -2178,6 +2213,10 @@ body {
 
 .data-\[state\=open\]\:bg-sidebar-accent[data-state="open"] {
   background-color: hsl(var(--sidebar-accent));
+}
+
+.data-\[state\=selected\]\:bg-muted[data-state="selected"] {
+  background-color: hsl(var(--muted));
 }
 
 .data-\[active\=true\]\:font-medium[data-active="true"] {
@@ -2569,6 +2608,10 @@ body {
   border-bottom-right-radius: calc(var(--radius) - 2px);
 }
 
+.\[\&\:has\(\[role\=checkbox\]\)\]\:pr-0:has([role=checkbox]) {
+  padding-right: 0px;
+}
+
 .\[\&\>button\]\:hidden>button {
   display: none;
 }
@@ -2599,6 +2642,10 @@ body {
   color: hsl(var(--sidebar-accent-foreground));
 }
 
+.\[\&\>tr\]\:last\:border-b-0:last-child>tr {
+  border-bottom-width: 0px;
+}
+
 .\[\&_svg\]\:pointer-events-none svg {
   pointer-events: none;
 }
@@ -2610,6 +2657,14 @@ body {
 
 .\[\&_svg\]\:shrink-0 svg {
   flex-shrink: 0;
+}
+
+.\[\&_tr\:last-child\]\:border-0 tr:last-child {
+  border-width: 0px;
+}
+
+.\[\&_tr\]\:border-b tr {
+  border-bottom-width: 1px;
 }
 
 [data-side=left][data-collapsible=offcanvas] .\[\[data-side\=left\]\[data-collapsible\=offcanvas\]_\&\]\:-right-2 {
