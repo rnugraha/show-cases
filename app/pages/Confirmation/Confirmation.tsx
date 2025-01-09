@@ -15,7 +15,7 @@ function Confirmation({ registree }: any) {
       <h1 className="text-3xl font-bold mt-4">
         Thank you for registering, {registree?.firstName}!{" "}
       </h1>
-      <div className="mt-4">
+      <div className="mt-4 text-sm">
         <p className="text-lg">Following is the information you provided:</p>
         <div className="mt-4">
           <p>

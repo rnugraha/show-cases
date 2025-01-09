@@ -23,6 +23,20 @@ function DataTable() {
 
   return (
     <div className="container w-full mr-auto p-4">
+      <div className="mb-4">
+        <h1 className="text-lg font-bold">Infinite Scroll</h1>
+        <p className="text-base">
+          Simple show case of a data table using{" "}
+          <a
+            href="https://tanstack.com/table/latest"
+            target="_blank"
+            className="text-blue-500 font-semibold"
+          >
+            react-table
+          </a>
+          .
+        </p>
+      </div>
       <StudentTable columns={columns} data={data} />
     </div>
   );

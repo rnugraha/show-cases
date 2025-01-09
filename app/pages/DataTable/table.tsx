@@ -15,7 +15,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
 import { Pagination } from "./pagination";
 
 interface StudentTableProps<TData, TValue> {

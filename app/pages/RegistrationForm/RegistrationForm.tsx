@@ -32,7 +32,9 @@ const formSchema = z.object({
   lastName: z.string().min(2).max(50),
   email: z.string().email(),
   countryCode: z.string().regex(/^\+\d{1,3}$/),
-  phone: z.string().regex(/^\d{10}$/),
+  phone: z.string().regex(/^\d{10}$/, {
+    message: "Invalid phone number",
+  }),
   birthDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
     message: "Please select a valid date",
   }),
@@ -194,6 +196,7 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
                       <FormControl>
                         <Input type="tel" placeholder="0666666666" {...field} />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />

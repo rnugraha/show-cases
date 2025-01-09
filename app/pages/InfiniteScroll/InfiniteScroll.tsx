@@ -67,9 +67,9 @@ function InfiniteScroll() {
 
   return (
     <div className="container max-auto px-4">
-      <h1 className="text-3xl font-bold mt-4">Infinite Scroll</h1>
-      <div className="mt-4">
-        <p className="text-lg">
+      <h1 className="text-lg font-bold">Infinite Scroll</h1>
+      <div className="mt-2">
+        <p className="text-base">
           This is a simple infinite scroll example. Scroll down to see more
           content. Number of images displayed: {displayedImages.length}.
         </p>
