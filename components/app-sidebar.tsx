@@ -73,11 +73,8 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
-        <SidebarMenuButton
-          size="lg"
-          className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-        >
+      <SidebarFooter className="border-t border-gray-200 py-2">
+        <SidebarMenuButton size="lg">
           <Avatar className="h-8 w-8 rounded-lg">
             <AvatarImage
               src="https://avatars.githubusercontent.com/u/2835281?v=4"

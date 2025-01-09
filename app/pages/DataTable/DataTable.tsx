@@ -22,7 +22,7 @@ function DataTable() {
   }, []);
 
   return (
-    <div className="p-4">
+    <div className="container w-full mr-auto p-4">
       <StudentTable columns={columns} data={data} />
     </div>
   );
