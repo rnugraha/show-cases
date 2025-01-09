@@ -1,6 +1,8 @@
 # React TypeScript Parcel Project
 
-A React-Typescript show case using TailwindCSS.
+A React-Typescript show cases using shadcn/ui component library.
+
+Live demo: https://show-cases.vercel.app/
 
 ## Table of Contents
 
@@ -40,10 +42,6 @@ This will start the application at `http://localhost:1234`.
 - `npm start`: Starts the development server.
 - `npm run build`: Builds the project for production.
 - `npm run lint`: Runs the linter.
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request for any changes.
 
 ## License
 
