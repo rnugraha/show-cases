@@ -24,7 +24,7 @@ function DataTable() {
   return (
     <div className="container w-full mr-auto p-4">
       <div className="mb-4">
-        <h1 className="text-lg font-bold">Infinite Scroll</h1>
+        <h1 className="text-lg font-bold">Data table</h1>
         <p className="text-base">
           Simple show case of a data table using{" "}
           <a
