@@ -1,8 +1,10 @@
 import React from "react";
 import {
   ColumnDef,
+  ColumnFiltersState,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   SortingState,
@@ -17,6 +19,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Input } from "@/components/ui/input";
 import { Pagination } from "./pagination";
 
 interface StudentTableProps<TData, TValue> {
@@ -33,6 +36,9 @@ export function StudentTable<TData, TValue>({
     pageIndex: 0, //initial page index
     pageSize: 20, //default page size
   });
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
   const table = useReactTable({
     data,
     columns,
@@ -40,15 +46,27 @@ export function StudentTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
     onPaginationChange: setPagination,
     state: {
       sorting,
+      columnFilters,
       pagination,
     },
   });
 
   return (
     <div>
+      <div className="flex items-center py-4">
+        <Input
+          placeholder="Filter lastname..."
+          onChange={(event) => {
+            table.getColumn("last_name")?.setFilterValue(event.target.value);
+          }}
+          className="max-w-sm"
+        />
+      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
