@@ -12,20 +12,16 @@ import {
 } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
-  Calendar,
-  Inbox,
-  Search,
-  Settings,
   FilePenLine,
   GalleryVertical,
   Table,
+  LayoutDashboard,
 } from "lucide-react";
-<FilePenLine />;
 
 // Menu items.
 const items = [
   {
-    title: "Registration Form",
+    title: "Form",
     url: "registration-form",
     icon: FilePenLine,
   },
@@ -39,11 +35,11 @@ const items = [
     url: "data-table",
     icon: Table,
   },
-  // {
-  //   title: "Search",
-  //   url: "#",
-  //   icon: Search,
-  // },
+  {
+    title: "Dashboard",
+    url: "dashboard",
+    icon: LayoutDashboard,
+  },
   // {
   //   title: "Settings",
   //   url: "#",

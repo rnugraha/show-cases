@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router";
 import Confirmation from "./pages/Confirmation";
 import InfiniteScroll from "./pages/InfiniteScroll/InfiniteScroll";
 import DataTable from "./pages/DataTable";
+import Dashboard from "./pages/Dashboard";
 
 export default function App() {
   const [registree, setRegistree] = useState(null);
@@ -25,6 +26,7 @@ export default function App() {
         />
         <Route path="infinite-scroll" element={<InfiniteScroll />} />
         <Route path="data-table" element={<DataTable />} />
+        <Route path="dashboard" element={<Dashboard />} />
       </Routes>
     </Layout>
   );
