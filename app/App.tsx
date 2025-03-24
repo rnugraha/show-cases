@@ -6,6 +6,7 @@ import Confirmation from "./pages/Confirmation";
 import InfiniteScroll from "./pages/InfiniteScroll/InfiniteScroll";
 import DataTable from "./pages/DataTable";
 import Dashboard from "./pages/Dashboard";
+import ModelViewer from "./pages/ModelViewer";
 
 interface Registree {
   firstName: string;
@@ -57,6 +58,7 @@ export default function App() {
           <Route path="infinite-scroll" element={<InfiniteScroll />} />
           <Route path="data-table" element={<DataTable />} />
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="model-viewer" element={<ModelViewer />} />
         </Routes>
       </Layout>
     </RegistreeContext.Provider>

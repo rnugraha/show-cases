@@ -16,6 +16,7 @@ import {
   GalleryVertical,
   Table,
   LayoutDashboard,
+  Box,
 } from "lucide-react";
 
 // Menu items.
@@ -40,11 +41,11 @@ const items = [
     url: "dashboard",
     icon: LayoutDashboard,
   },
-  // {
-  //   title: "Settings",
-  //   url: "#",
-  //   icon: Settings,
-  // },
+  {
+    title: "3D Model Viewer",
+    url: "model-viewer",
+    icon: Box,
+  },
 ];
 
 export function AppSidebar() {
