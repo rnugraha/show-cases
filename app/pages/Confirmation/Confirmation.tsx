@@ -1,10 +1,14 @@
+import { RegistreeContext } from "@/app/App";
 import { Button } from "@/components/ui/button";
 import { Field } from "@headlessui/react/dist/components/field/field";
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router";
 
-function Confirmation({ registree }: any) {
+function Confirmation() {
   let navigate = useNavigate();
+  const context = useContext(RegistreeContext);
+  const registree = context?.registree;
+
   function onBack() {
     // Implement the function to navigate back to the registration
     navigate("/registration-form");

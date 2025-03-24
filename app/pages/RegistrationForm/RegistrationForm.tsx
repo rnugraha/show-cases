@@ -1,7 +1,7 @@
-import { Input } from "@/components/ui/input";
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router";
-
+import { RegistreeContext } from "@/app/App";
+import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
@@ -51,7 +51,10 @@ const formSchema = z.object({
   membershipRules: z.boolean({ message: "Please accept the membership rules" }),
 });
 
-function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
+function RegistrationForm() {
+  const context = useContext(RegistreeContext);
+  const { registree, setRegistree } = context;
+
   let navigate = useNavigate();
   const today = new Date();
   const minDate = new Date(
@@ -60,24 +63,9 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
     today.getDate()
   );
 
-  // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      countryCode: "+1",
-      phone: "",
-      birthDate: "",
-      gender: undefined,
-      streetName: "",
-      city: "",
-      postalCode: "",
-      country: undefined,
-      badmintonLevel: "beginner",
-      membershipRules: false,
-    },
+    defaultValues: registree || {},
   });
 
   function onSubmitMe(values: z.infer<typeof formSchema>) {
@@ -89,7 +77,7 @@ function RegistrationForm({ onSubmit }: { onSubmit: (data: any) => void }) {
       });
       return;
     }
-    onSubmit(values);
+    setRegistree(values);
     navigate("/confirm");
   }
 
