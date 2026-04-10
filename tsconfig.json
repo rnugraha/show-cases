@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "target": "es6",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "lib": ["dom", "es2019", "dom.iterable"],
     "module": "commonjs",
     "strict": true,
@@ -11,13 +11,13 @@
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "@/*": [
-        "./*"
+        "./src/*"
       ]
     }
   },
   "include": [
-    "app/**/*"
-, "lib"  ],
+    "src/**/*"
+  ],
   "exclude": [
     "node_modules",
     "**/*.spec.ts"

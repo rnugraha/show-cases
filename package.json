@@ -1,6 +1,6 @@
 {
   "name": "badminton-registration-form",
-  "source": "app/index.html",
+  "source": "src/index.html",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "clean-dist": "rm -rf dist && mkdir dist",
@@ -9,12 +9,13 @@
     "start": "npm run init && parcel",
     "build": "npm run init && parcel build",
     "test": "jest",
-    "lint": "eslint",
+    "lint": "biome check .",
     "check": "tsc --noEmit",
     "ci": "npm build && npm test && npm lint && npm check",
     "new-component": "new-component"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.4.11",
     "@types/three": "^0.174.0",
     "parcel": "latest",
     "process": "^0.11.10",
