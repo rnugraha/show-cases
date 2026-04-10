@@ -1,12 +1,11 @@
-import React from "react";
-
+import type React from "react";
+import { AppSidebar } from "@/components/app-sidebar";
+import { Separator } from "@/components/ui/separator";
 import {
+	SidebarInset,
 	SidebarProvider,
 	SidebarTrigger,
-	SidebarInset,
 } from "@/components/ui/sidebar";
-import { Separator } from "@/components/ui/separator";
-import { AppSidebar } from "@/components/app-sidebar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (

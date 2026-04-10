@@ -1,8 +1,8 @@
+import { Field } from "@headlessui/react";
+import { useContext } from "react";
+import { useNavigate } from "react-router";
 import { RegistreeContext } from "@/App";
 import { Button } from "@/components/ui/button";
-import { Field } from "@headlessui/react";
-import React, { useContext } from "react";
-import { useNavigate } from "react-router";
 
 function Confirmation() {
 	const navigate = useNavigate();

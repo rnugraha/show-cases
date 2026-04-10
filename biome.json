@@ -6,7 +6,16 @@
 		"useIgnoreFile": true
 	},
 	"files": {
-		"includes": ["**", "!!**/dist"]
+		"includes": ["**", "!!**/dist", "!!src/output.css", "!!src/styles.css"]
+	},
+	"css": {
+		"parser": {
+			"allowWrongLineComments": true,
+			"cssModules": false
+		},
+		"linter": {
+			"enabled": true
+		}
 	},
 	"formatter": {
 		"enabled": true,
@@ -15,7 +24,10 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"suspicious": {
+				"noUnknownAtRules": "off"
+			}
 		}
 	},
 	"javascript": {

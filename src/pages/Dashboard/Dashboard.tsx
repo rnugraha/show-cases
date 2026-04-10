@@ -1,9 +1,8 @@
-import React from "react";
+import AllergyOutlook from "./AllergyOutlook";
+import CurrentWeather from "./CurrentWeather";
+import RainDrops from "./RainDrops";
 import TemperatureChart from "./TemperatureChart";
 import TemperaturePerHour from "./TemperaturePerHour";
-import CurrentWeather from "./CurrentWeather";
-import AllergyOutlook from "./AllergyOutlook";
-import RainDrops from "./RainDrops";
 
 type WeatherType =
 	| "storm"

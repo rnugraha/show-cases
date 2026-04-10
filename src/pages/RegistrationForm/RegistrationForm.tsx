@@ -1,9 +1,11 @@
-import React, { useContext } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useContext } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import { RegistreeContext } from "@/App";
-import { Input } from "@/components/ui/input";
 import { z } from "zod";
+import { RegistreeContext } from "@/App";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
 	Form,
 	FormControl,
@@ -12,8 +14,8 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
 	Select,
 	SelectContent,
@@ -21,9 +23,6 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 
 const formSchema = z.object({
 	firstName: z.string().min(2).max(50),
@@ -55,7 +54,7 @@ function RegistrationForm() {
 	const context = useContext(RegistreeContext);
 	const { registree, setRegistree } = context;
 
-	let navigate = useNavigate();
+	const navigate = useNavigate();
 	const today = new Date();
 	const minDate = new Date(
 		today.getFullYear() - 18,

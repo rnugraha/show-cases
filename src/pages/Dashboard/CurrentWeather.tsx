@@ -1,12 +1,11 @@
+import { CloudLightning } from "lucide-react";
 import {
 	Card,
+	CardContent,
+	CardDescription,
 	CardHeader,
 	CardTitle,
-	CardDescription,
-	CardContent,
 } from "@/components/ui/card";
-import { CloudLightning } from "lucide-react";
-import React from "react";
 
 function CurrentWeather() {
 	return (

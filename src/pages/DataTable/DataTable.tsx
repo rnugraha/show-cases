@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { Student, columns } from "./columns";
-import { StudentTable } from "./table";
+import { columns, type Student } from "./columns";
 import { students } from "./students";
+import { StudentTable } from "./table";
 
 // Get dummy data
 async function getData(): Promise<Student[]> {
@@ -31,6 +31,7 @@ function DataTable() {
 						href="https://tanstack.com/table/latest"
 						target="_blank"
 						className="text-blue-500 font-semibold"
+						rel="noopener"
 					>
 						react-table
 					</a>

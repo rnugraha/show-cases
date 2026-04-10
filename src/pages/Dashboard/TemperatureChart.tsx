@@ -9,7 +9,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import {
-	ChartConfig,
+	type ChartConfig,
 	ChartContainer,
 	ChartLegend,
 	ChartLegendContent,
@@ -23,6 +23,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+
 const chartData = [
 	{ date: "2024-04-01", maxTemp: 16, minTemp: 8 },
 	{ date: "2024-04-02", maxTemp: 17, minTemp: 8 },

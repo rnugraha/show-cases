@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import RegistrationForm from "./pages/RegistrationForm/RegistrationForm";
-import Layout from "./layout";
 import { Route, Routes } from "react-router";
+import Layout from "./layout";
 import Confirmation from "./pages/Confirmation";
-import InfiniteScroll from "./pages/InfiniteScroll/InfiniteScroll";
-import DataTable from "./pages/DataTable";
 import Dashboard from "./pages/Dashboard";
+import DataTable from "./pages/DataTable";
+import InfiniteScroll from "./pages/InfiniteScroll/InfiniteScroll";
 import ModelViewer from "./pages/ModelViewer";
+import RegistrationForm from "./pages/RegistrationForm/RegistrationForm";
 
 interface Registree {
 	firstName: string;

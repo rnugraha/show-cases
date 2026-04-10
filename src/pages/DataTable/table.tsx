@@ -1,16 +1,16 @@
-import React from "react";
 import {
-	ColumnDef,
-	ColumnFiltersState,
+	type ColumnDef,
+	type ColumnFiltersState,
 	flexRender,
 	getCoreRowModel,
 	getFilteredRowModel,
 	getPaginationRowModel,
 	getSortedRowModel,
-	SortingState,
+	type SortingState,
 	useReactTable,
 } from "@tanstack/react-table";
-
+import React from "react";
+import { Input } from "@/components/ui/input";
 import {
 	Table,
 	TableBody,
@@ -19,7 +19,6 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
-import { Input } from "@/components/ui/input";
 import { Pagination } from "./pagination";
 
 interface StudentTableProps<TData, TValue> {

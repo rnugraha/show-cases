@@ -894,7 +894,7 @@ body {
 }
 
 .\!table {
-	display: table !important;
+	display: table;
 }
 
 .table {
@@ -2498,8 +2498,8 @@ body {
 }
 
 .group[data-collapsible="icon"] .group-data-\[collapsible\=icon\]\:\!size-8 {
-	width: 2rem !important;
-	height: 2rem !important;
+	width: 2rem;
+	height: 2rem;
 }
 
 .group[data-collapsible="icon"]
@@ -2564,11 +2564,11 @@ body {
 }
 
 .group[data-collapsible="icon"] .group-data-\[collapsible\=icon\]\:\!p-0 {
-	padding: 0px !important;
+	padding: 0px;
 }
 
 .group[data-collapsible="icon"] .group-data-\[collapsible\=icon\]\:\!p-2 {
-	padding: 0.5rem !important;
+	padding: 0.5rem;
 }
 
 .group[data-collapsible="icon"] .group-data-\[collapsible\=icon\]\:opacity-0 {

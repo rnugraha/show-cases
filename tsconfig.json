@@ -1,25 +1,18 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "target": "es6",
-    "jsx": "react-jsx",
-    "lib": ["dom", "es2019", "dom.iterable"],
-    "module": "commonjs",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    }
-  },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts"
-  ]
+	"compilerOptions": {
+		"baseUrl": ".",
+		"target": "es6",
+		"jsx": "react-jsx",
+		"lib": ["dom", "es2019", "dom.iterable"],
+		"module": "commonjs",
+		"strict": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"paths": {
+			"@/*": ["./src/*"]
+		}
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "**/*.spec.ts"]
 }

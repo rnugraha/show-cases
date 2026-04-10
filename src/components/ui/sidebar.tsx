@@ -1,10 +1,9 @@
-import React from "react";
 import { Slot } from "@radix-ui/react-slot";
-import { VariantProps, cva } from "class-variance-authority";
+import { cva, type VariantProps } from "class-variance-authority";
 import { PanelLeft } from "lucide-react";
+import React from "react";
 
 import { useIsMobile } from "@/components/hooks/use-mobile";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
@@ -16,6 +15,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -82,6 +82,7 @@ const SidebarProvider = React.forwardRef<
 				}
 
 				// This sets the cookie to keep the sidebar state.
+				// biome-ignore lint/suspicious/noDocumentCookie: shadcn sidebar uses document.cookie for persistence
 				document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
 			},
 			[setOpenProp, open],
@@ -92,7 +93,7 @@ const SidebarProvider = React.forwardRef<
 			return isMobile
 				? setOpenMobile((open) => !open)
 				: setOpen((open) => !open);
-		}, [isMobile, setOpen, setOpenMobile]);
+		}, [isMobile, setOpen]);
 
 		// Adds a keyboard shortcut to toggle the sidebar.
 		React.useEffect(() => {
@@ -124,15 +125,7 @@ const SidebarProvider = React.forwardRef<
 				setOpenMobile,
 				toggleSidebar,
 			}),
-			[
-				state,
-				open,
-				setOpen,
-				isMobile,
-				openMobile,
-				setOpenMobile,
-				toggleSidebar,
-			],
+			[state, open, setOpen, isMobile, openMobile, toggleSidebar],
 		);
 
 		return (

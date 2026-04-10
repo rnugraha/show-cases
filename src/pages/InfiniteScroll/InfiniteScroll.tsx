@@ -31,7 +31,7 @@ const images = [
 function InfiniteScroll() {
 	const observerTarget = React.useRef<HTMLDivElement | null>(null);
 	const [imgLength, setImgLength] = React.useState(6);
-	const [showSpinner, setShowSpinner] = React.useState(false);
+	const [_showSpinner, setShowSpinner] = React.useState(false);
 	const [displayedImages, setDisplayedImages] = React.useState([
 		...images.slice(0, 6),
 	]);
@@ -63,7 +63,7 @@ function InfiniteScroll() {
 		return () => {
 			observer.disconnect();
 		};
-	}, [displayedImages.length]);
+	}, [displayedImages.length, imgLength, displayedImages]);
 
 	return (
 		<div className="container max-auto px-4">
@@ -80,8 +80,10 @@ function InfiniteScroll() {
 								.filter((_, index) => index % 2 === 0)
 								.map((image) => (
 									<img
+										key={image}
 										src={`https://www.w3schools.com/w3images/${image}`}
 										className="w-full mt-2"
+										alt={image}
 									/>
 								))}
 						</div>
@@ -90,8 +92,10 @@ function InfiniteScroll() {
 								.filter((_, index) => index % 2 === 1)
 								.map((image) => (
 									<img
+										key={image}
 										src={`https://www.w3schools.com/w3images/${image}`}
 										className="w-full mt-2"
+										alt={image}
 									/>
 								))}
 						</div>

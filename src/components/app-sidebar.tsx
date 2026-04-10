@@ -1,4 +1,11 @@
-import React from "react";
+import {
+	Box,
+	FilePenLine,
+	GalleryVertical,
+	LayoutDashboard,
+	Table,
+} from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
 	Sidebar,
 	SidebarContent,
@@ -10,14 +17,6 @@ import {
 	SidebarMenuButton,
 	SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-	FilePenLine,
-	GalleryVertical,
-	Table,
-	LayoutDashboard,
-	Box,
-} from "lucide-react";
 
 // Menu items.
 const items = [

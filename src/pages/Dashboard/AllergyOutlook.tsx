@@ -1,12 +1,11 @@
 import {
 	Card,
+	CardContent,
+	CardDescription,
 	CardHeader,
 	CardTitle,
-	CardDescription,
-	CardContent,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import React from "react";
 
 function AllergyOutlook() {
 	return (

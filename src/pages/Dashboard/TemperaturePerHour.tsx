@@ -1,15 +1,14 @@
-import React from "react";
-
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-	CloudLightning,
 	CloudDrizzle,
-	CloudRain,
-	Snowflake,
 	CloudFog,
-	Sun,
+	CloudLightning,
+	CloudRain,
 	Cloudy,
+	Snowflake,
+	Sun,
 } from "lucide-react";
+import React from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const weatherIcons = {
 	cloudy: Cloudy,
