@@ -2,7 +2,7 @@ import { Environment, OrbitControls } from "@react-three/drei";
 import { Canvas, useLoader } from "@react-three/fiber";
 import type React from "react";
 import { ObjectLoader } from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 type ModelProps = {
 	modelPath: string;
