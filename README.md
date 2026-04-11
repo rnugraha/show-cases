@@ -18,10 +18,10 @@ Live demo: https://show-cases.vercel.app/
 ## Tech Stack
 
 **Core**
-- [React 18](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
-- [Parcel](https://parceljs.org/) — zero-config bundler
+- [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vite.dev/) — dev server and bundler
 - [React Router 7](https://reactrouter.com/) — client-side routing
-- [Tailwind CSS](https://tailwindcss.com/) — utility-first styling
+- [Tailwind CSS v4](https://tailwindcss.com/) — utility-first styling
 
 **UI Components**
 - [shadcn/ui](https://ui.shadcn.com/) — composable component system built on Radix UI
@@ -37,10 +37,10 @@ Live demo: https://show-cases.vercel.app/
 - [TanStack Table v8](https://tanstack.com/table) — headless table with sorting, filtering, and pagination
 
 **Charts & Visualization**
-- [Recharts](https://recharts.org/) — composable chart library
+- [Recharts v3](https://recharts.org/) — composable chart library
 
 **3D Rendering**
-- [Three.js](https://threejs.org/) + [React Three Fiber](https://docs.pmnd.rs/react-three-fiber) + [drei](https://github.com/pmndrs/drei) — 3D scene rendering in React
+- [Three.js](https://threejs.org/) + [React Three Fiber v9](https://docs.pmnd.rs/react-three-fiber) + [drei](https://github.com/pmndrs/drei) — 3D scene rendering in React
 
 **Tooling**
 - [Biome](https://biomejs.dev/) — fast linter and formatter
@@ -54,14 +54,15 @@ npm install
 npm start
 ```
 
-Open `http://localhost:1234` in your browser.
+Open `http://localhost:5173` in your browser.
 
 ## Scripts
 
 | Command | Description |
 |---|---|
-| `npm start` | Start dev server at `localhost:1234` |
+| `npm start` | Start dev server at `localhost:5173` |
 | `npm run build` | Production build |
+| `npm run preview` | Preview production build locally |
 | `npm run lint` | Lint and format check (Biome) |
 | `npm run check` | TypeScript type check |
 

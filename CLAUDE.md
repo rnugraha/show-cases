@@ -5,10 +5,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-npm start          # Dev server at localhost:1234 (runs init + parcel)
-npm run build      # Production build (runs init + parcel build)
+npm start          # Dev server at localhost:5173
+npm run build      # Production build
+npm run preview    # Preview production build locally
 npm test           # Run Jest tests
-npm run lint       # ESLint
+npm run lint       # Biome lint
 npm run check      # TypeScript type checking (tsc --noEmit)
 npm run ci         # Build + test + lint + type check
 npm run new-component  # Component generator scaffold
@@ -16,9 +17,9 @@ npm run new-component  # Component generator scaffold
 
 ## Architecture
 
-This is a React 18 + TypeScript SPA bundled with **Parcel** (not Next.js/Vite). It serves as a showcase of UI patterns using **shadcn/ui** (Radix UI primitives + CVA), **Tailwind CSS**, and several specialized libraries.
+This is a React 19 + TypeScript SPA bundled with **Vite**. It serves as a showcase of UI patterns using **shadcn/ui** (Radix UI primitives + CVA), **Tailwind CSS v4**, and several specialized libraries.
 
-**Entry point:** `src/index.html` → `src/index.tsx` → `src/App.tsx`
+**Entry point:** `index.html` → `src/index.tsx` → `src/App.tsx`
 
 **Routing:** React Router 7 with all routes defined in `App.tsx`. Vercel rewrites all paths to `/` for SPA behavior.
 
@@ -42,6 +43,8 @@ Each page lives under `src/pages/<PageName>/` with an `index.ts` barrel export. 
 **Forms:** React Hook Form with Zod resolver. Schemas are defined inline in the page file. Custom form field components live in `src/components/ui/form.tsx`.
 
 **Tables:** TanStack Table with sorting, filtering, and pagination. Mock data typed in TypeScript lives alongside the page (e.g., `src/pages/DataTable/students.ts`).
+
+**Tailwind v4 config:** All theme tokens (`@theme inline`), dark mode variant, container utility, and keyframes live in `src/styles.css`. There is no `tailwind.config.js`.
 
 **UI Components:** `src/components/ui/` contains shadcn/ui components. Do not manually edit these — regenerate via `npx shadcn@latest add <component>` if changes are needed.
 
