@@ -1,50 +1,70 @@
-# React TypeScript Parcel Project
+# Show Cases
 
-A React-Typescript show cases using shadcn/ui component library.
+A portfolio project showcasing various React UI patterns and frontend techniques, built with modern tooling and component libraries.
 
 Live demo: https://show-cases.vercel.app/
 
-## Table of Contents
+## Showcases
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Scripts](#scripts)
-- [Contributing](#contributing)
-- [License](#license)
+| Route | Description |
+|---|---|
+| `/` | Registration form with validation |
+| `/confirm` | Confirmation page with shared state |
+| `/data-table` | Sortable, filterable, paginated data table |
+| `/dashboard` | Weather dashboard with charts |
+| `/infinite-scroll` | Infinite scroll image gallery |
+| `/model-viewer` | Interactive 3D model viewer |
 
-## Installation
+## Tech Stack
 
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/your-username/show-cases.git
-   ```
-2. Navigate to the project directory:
-   ```sh
-   cd show-cases
-   ```
-3. Install dependencies:
-   ```sh
-   npm install
-   ```
+**Core**
+- [React 18](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Parcel](https://parceljs.org/) — zero-config bundler
+- [React Router 7](https://reactrouter.com/) — client-side routing
+- [Tailwind CSS](https://tailwindcss.com/) — utility-first styling
 
-## Usage
+**UI Components**
+- [shadcn/ui](https://ui.shadcn.com/) — composable component system built on Radix UI
+- [Radix UI](https://www.radix-ui.com/) — accessible, unstyled primitives
+- [Lucide React](https://lucide.dev/) — icon library
+- [class-variance-authority](https://cva.style/) + [tailwind-merge](https://github.com/dcastil/tailwind-merge) — variant-based component styling
 
-To start the development server, run:
+**Forms & Validation**
+- [React Hook Form](https://react-hook-form.com/) — performant form management
+- [Zod](https://zod.dev/) — schema-based validation
+
+**Data & Tables**
+- [TanStack Table v8](https://tanstack.com/table) — headless table with sorting, filtering, and pagination
+
+**Charts & Visualization**
+- [Recharts](https://recharts.org/) — composable chart library
+
+**3D Rendering**
+- [Three.js](https://threejs.org/) + [React Three Fiber](https://docs.pmnd.rs/react-three-fiber) + [drei](https://github.com/pmndrs/drei) — 3D scene rendering in React
+
+**Tooling**
+- [Biome](https://biomejs.dev/) — fast linter and formatter
+
+## Getting Started
 
 ```sh
+git clone https://github.com/your-username/show-cases.git
+cd show-cases
+npm install
 npm start
 ```
 
-This will start the application at `http://localhost:1234`.
+Open `http://localhost:1234` in your browser.
 
 ## Scripts
 
-- `npm start`: Starts the development server.
-- `npm run build`: Builds the project for production.
-- `npm run lint`: Runs the linter.
+| Command | Description |
+|---|---|
+| `npm start` | Start dev server at `localhost:1234` |
+| `npm run build` | Production build |
+| `npm run lint` | Lint and format check (Biome) |
+| `npm run check` | TypeScript type check |
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Resources
+MIT — see [LICENSE](LICENSE) for details.
