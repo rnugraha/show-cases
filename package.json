@@ -2,6 +2,9 @@
 	"name": "badminton-registration-form",
 	"source": "src/index.html",
 	"browserslist": "> 0.5%, last 2 versions, not dead",
+	"alias": {
+		"@vercel/analytics/react": "@vercel/analytics/dist/react/index.js"
+	},
 	"scripts": {
 		"clean-dist": "rm -rf dist && mkdir dist",
 		"init": "npm run clean-dist && npm run copy-files",
@@ -39,6 +42,7 @@
 		"@tanstack/react-table": "^8.20.6",
 		"@types/react": "^18.3.12",
 		"@types/react-dom": "^18.3.1",
+		"@vercel/analytics": "^2.0.1",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
 		"date-fns": "^3.6.0",

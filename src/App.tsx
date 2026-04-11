@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import React, { useState } from "react";
 import { Route, Routes } from "react-router";
 import Layout from "./layout";
@@ -61,6 +62,7 @@ export default function App() {
 					<Route path="model-viewer" element={<ModelViewer />} />
 				</Routes>
 			</Layout>
+			<Analytics />
 		</RegistreeContext.Provider>
 	);
 }
