@@ -3,6 +3,7 @@
 	"source": "src/index.html",
 	"browserslist": "> 0.5%, last 2 versions, not dead",
 	"alias": {
+		"@vercel/analytics/react": "@vercel/analytics/dist/react/index.js"
 		"@vercel/speed-insights/react": "@vercel/speed-insights/dist/react"
 	},
 	"scripts": {
@@ -42,6 +43,7 @@
 		"@tanstack/react-table": "^8.20.6",
 		"@types/react": "^18.3.12",
 		"@types/react-dom": "^18.3.1",
+		"@vercel/analytics": "^2.0.1",
 		"@vercel/speed-insights": "^2.0.0",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",

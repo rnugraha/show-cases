@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import React, { useState } from "react";
 import { Route, Routes } from "react-router";
@@ -62,6 +63,7 @@ export default function App() {
 					<Route path="model-viewer" element={<ModelViewer />} />
 				</Routes>
 			</Layout>
+			<Analytics />
 			<SpeedInsights />
 		</RegistreeContext.Provider>
 	);
