@@ -50,8 +50,8 @@ Live demo: https://show-cases.vercel.app/
 ```sh
 git clone https://github.com/your-username/show-cases.git
 cd show-cases
-npm install
-npm start
+pnpm install
+pnpm start
 ```
 
 Open `http://localhost:5173` in your browser.
@@ -60,11 +60,11 @@ Open `http://localhost:5173` in your browser.
 
 | Command | Description |
 |---|---|
-| `npm start` | Start dev server at `localhost:5173` |
-| `npm run build` | Production build |
-| `npm run preview` | Preview production build locally |
-| `npm run lint` | Lint and format check (Biome) |
-| `npm run check` | TypeScript type check |
+| `pnpm start` | Start dev server at `localhost:5173` |
+| `pnpm run build` | Production build |
+| `pnpm run preview` | Preview production build locally |
+| `pnpm run lint` | Lint and format check (Biome) |
+| `pnpm run check` | TypeScript type check |
 
 ## License
 

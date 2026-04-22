@@ -5,14 +5,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-npm start          # Dev server at localhost:5173
-npm run build      # Production build
-npm run preview    # Preview production build locally
-npm test           # Run Jest tests
-npm run lint       # Biome lint
-npm run check      # TypeScript type checking (tsc --noEmit)
-npm run ci         # Build + test + lint + type check
-npm run new-component  # Component generator scaffold
+pnpm start          # Dev server at localhost:5173
+pnpm run build      # Production build
+pnpm run preview    # Preview production build locally
+pnpm test           # Run Jest tests
+pnpm run lint       # Biome lint
+pnpm run check      # TypeScript type checking (tsc --noEmit)
+pnpm run ci         # Build + test + lint + type check
+pnpm run new-component  # Component generator scaffold
 ```
 
 ## Architecture
