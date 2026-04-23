@@ -2,6 +2,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import React, { useState } from "react";
 import { Route, Routes } from "react-router";
+import { ThemeProvider } from "./components/theme-provider";
 import Layout from "./layout";
 import Confirmation from "./pages/Confirmation";
 import Dashboard from "./pages/Dashboard";
@@ -52,19 +53,21 @@ export default function App() {
 	const [registree, setRegistree] = useState(null as Registree | null);
 	return (
 		<RegistreeContext.Provider value={{ registree, setRegistree }}>
-			<Layout>
-				<Routes>
-					<Route index element={<RegistrationForm />} />
-					<Route path="registration-form" element={<RegistrationForm />} />
-					<Route path="confirm" element={<Confirmation />} />
-					<Route path="infinite-scroll" element={<InfiniteScroll />} />
-					<Route path="data-table" element={<DataTable />} />
-					<Route path="dashboard" element={<Dashboard />} />
-					<Route path="model-viewer" element={<ModelViewer />} />
-				</Routes>
-			</Layout>
-			<Analytics />
-			<SpeedInsights />
+			<ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+				<Layout>
+					<Routes>
+						<Route index element={<RegistrationForm />} />
+						<Route path="registration-form" element={<RegistrationForm />} />
+						<Route path="confirm" element={<Confirmation />} />
+						<Route path="infinite-scroll" element={<InfiniteScroll />} />
+						<Route path="data-table" element={<DataTable />} />
+						<Route path="dashboard" element={<Dashboard />} />
+						<Route path="model-viewer" element={<ModelViewer />} />
+					</Routes>
+				</Layout>
+				<Analytics />
+				<SpeedInsights />
+			</ThemeProvider>
 		</RegistreeContext.Provider>
 	);
 }
